@@ -27,6 +27,7 @@
         android:layout_marginTop="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:inputType="textEmailAddress"
         android:hint="Enter your email"
         android:drawableStart="@drawable/ic_mail"
         />
@@ -41,6 +42,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        android:inputType="textPassword"
         android:hint="Enter your password"
         android:drawableStart="@drawable/ic_password"
         />
