@@ -9,5 +9,17 @@
         android:id="@+id/startFragment"
         android:name="com.exceptioncatchers.bookfinder.StartFragment"
         android:label="fragment_start"
-        tools:layout="@layout/fragment_start" />
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_booksListFragment"
+            app:destination="@id/booksListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/booksListFragment"
+        android:name="com.exceptioncatchers.bookfinder.books_list.presentation.view.BooksListFragment"
+        android:label="fragment_books_list"
+        tools:layout="@layout/fragment_books_list" />
+
+
 </navigation>
