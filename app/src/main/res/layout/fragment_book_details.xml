@@ -32,7 +32,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardViewBookPoster"
         android:layout_width="210dp"
-        android:layout_height="350dp"
+        android:layout_height="340dp"
         android:layout_marginTop="10dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
