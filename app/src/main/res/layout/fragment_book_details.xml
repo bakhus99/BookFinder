@@ -132,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/radViewLine" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/userImage"
         android:layout_width="10dp"
         android:layout_height="10dp"
         android:layout_marginStart="5dp"
@@ -148,12 +148,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="15dp"
-        android:text="username"
+        android:text="@string/username"
         android:textColor="@color/button_get_sharing"
         android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/bookOwner"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
         app:layout_constraintTop_toBottomOf="@+id/radViewLine" />
 
     <TextView
@@ -173,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginTop="15dp"
-        android:text="156"
+        android:text="@string/sharing_count"
         android:textColor="@color/button_get_sharing"
         android:textSize="12sp"
         android:textStyle="bold"
@@ -188,7 +188,7 @@
         android:layout_marginStart="4dp"
         android:textSize="12sp"
         android:layout_marginTop="15dp"
-        android:text="раз"
+        android:text="@string/raz"
         app:layout_constraintStart_toEndOf="@+id/quantityCount"
         app:layout_constraintTop_toBottomOf="@+id/radViewLine" />
 </androidx.constraintlayout.widget.ConstraintLayout>
