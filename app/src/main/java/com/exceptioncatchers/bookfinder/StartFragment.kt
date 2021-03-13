@@ -15,7 +15,14 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
 
+        binding.btnLogin.setOnClickListener {
+            val action = StartFragmentDirections.actionStartFragmentToLoginFragment()
+            findNavController().navigate(action)
+        }
+        binding.btnRegister.setOnClickListener {
+            val action = StartFragmentDirections.actionStartFragmentToRegisterFragment()
+            findNavController().navigate(action)
+        }
+
     }
-
-
 }
