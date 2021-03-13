@@ -24,7 +24,5 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             findNavController().navigate(action)
         }
 
-
     }
-
 }
