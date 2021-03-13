@@ -65,10 +65,10 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
     }
 
     private fun showBookDetailsFragment(book: BookDetails) {
-        requireFragmentManager().beginTransaction()
-            .replace(R.id.nav_host_fragment, FragmentBookDetails.newInstance(book.bookId))
-            .addToBackStack("FragmentBookDetails")
-            .commit()
+//        requireFragmentManager().beginTransaction()
+//            .replace(R.id.nav_host_fragment, FragmentBookDetails.newInstance(book.bookId))
+//            .addToBackStack("FragmentBookDetails")
+//            .commit()
     }
 
     companion object {
