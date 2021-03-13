@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
-import com.exceptioncatchers.bookfinder.loginregister.data.User
+import com.exceptioncatchers.bookfinder.loginregister.models.User
 import com.exceptioncatchers.bookfinder.userlibrary.repository.BookLibraryRepoInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

@@ -28,13 +28,22 @@ class BookLibraryRepoImpl: BookLibraryRepoInterface {
         return bookDetail
     }
 
-    override suspend fun getUser(userName: String): LiveData<User> {
-        TODO()
+    override suspend fun getUser(userId: String): LiveData<User> {
+        loadUserInfo(userId)
+        return user
     }
 
     override suspend fun getUserBookList(userName: String): LiveData<List<BookDetails>> {
         loadBookList()
         return bookList
+    }
+
+    private fun loadUserInfo(userId: String) {
+        scope.launch { repository.getUserById(
+            success = { _user.postValue(it) },
+            fail = { TODO() },
+            userId = userId
+        ) }
     }
 
     private fun loadBookList() {

@@ -13,6 +13,8 @@ import com.exceptioncatchers.bookfinder.bookdetails.viewmodel.BookDetailsViewMod
 import com.exceptioncatchers.bookfinder.bookdetails.viewmodel.BookDetailsViewModelFactory
 import com.exceptioncatchers.bookfinder.books_list.data.BooksListRepository
 import com.exceptioncatchers.bookfinder.databinding.FragmentBookDetailsBinding
+import com.exceptioncatchers.bookfinder.loginregister.models.User
+import com.exceptioncatchers.bookfinder.userlibrary.FragmentUserLibrary
 
 class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     private val binding: FragmentBookDetailsBinding by lazy {
@@ -22,6 +24,7 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
         BookDetailsViewModelFactory()
     }
     private lateinit var bookId: String
+    private var user = User()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,7 +35,19 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     private fun subscribeBookDetailsResponse(bookId: String) {
         bookDetailsViewModel.getBook(bookId)
         bookDetailsViewModel.getBookDetails()
-            .observe(this.viewLifecycleOwner, { setupBookDetails(it) })
+            .observe(this.viewLifecycleOwner, {
+                subscribeUserInfo(it.userUid)
+                setupBookDetails(it)
+            })
+    }
+
+    private fun subscribeUserInfo(userId: String) {
+        bookDetailsViewModel.getUser(userId)
+        bookDetailsViewModel.getUserInfo().observe(this.viewLifecycleOwner, { userResponse ->
+            userResponse?.let {
+                user = it
+            }
+        })
     }
 
     private fun setupBookDetails(book: BookDetails) {
@@ -53,8 +68,15 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
         binding.bookDescription.setOnClickListener { TODO() }
         //реализовать подгрузку юзернейма и листенер с переходом в профиль
         binding.bookOwnerUsername.append(book.userUid)
-        binding.bookOwnerUsername.setOnClickListener { TODO() }
+        binding.bookOwnerUsername.setOnClickListener { goUserLibrary(user.uid) }
         binding.quantityCount.append(book.sharingCount.toString())
+    }
+
+    private fun goUserLibrary(userId: String) {
+        requireFragmentManager().beginTransaction()
+            .replace(R.id.nav_host_fragment, FragmentUserLibrary.newInstance(userId))
+            .addToBackStack("FragmentBookDetails")
+            .commit()
     }
 
     companion object {

@@ -25,17 +25,17 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
     private val userLibraryViewModel: UserLibraryViewModel by viewModels {
         UserLibraryViewModelFactory()
     }
-    private lateinit var userName: String
+    private lateinit var userId: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userName = requireNotNull(requireArguments().getString(USER_KEY))
-        subscribeBookLibrary(userName)
+        userId = requireNotNull(requireArguments().getString(USER_KEY))
+        subscribeBookLibrary(userId)
     }
 
-    private fun subscribeBookLibrary(userName: String) {
-        userLibraryViewModel.getUser(userName)
-        userLibraryViewModel.getBookListFromUser(userName)
+    private fun subscribeBookLibrary(userId: String) {
+        userLibraryViewModel.getUser(userId)
+        userLibraryViewModel.getBookListFromUser(userId)
         userLibraryViewModel.getBookList().observe(this.viewLifecycleOwner, { initRecycler(it) })
         userLibraryViewModel.getUserInfoInDatabase().observe(this.viewLifecycleOwner, { initUserinfo(it) })
     }
@@ -74,8 +74,8 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
     companion object {
         private const val COLUMN = 3
         private const val USER_KEY = "user"
-        fun newInstance(userName: String): Fragment = FragmentUserLibrary().apply {
-            arguments = bundleOf(USER_KEY to userName)
+        fun newInstance(userId: String): Fragment = FragmentUserLibrary().apply {
+            arguments = bundleOf(USER_KEY to userId)
         }
     }
 }
