@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_startFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_booksListFragment"
+            app:destination="@id/booksListFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -53,4 +56,9 @@
             android:name="user"
             app:argType="com.exceptioncatchers.bookfinder.loginregister.models.User" />
     </fragment>
+    <fragment
+        android:id="@+id/booksListFragment"
+        android:name="com.exceptioncatchers.bookfinder.books_list.presentation.view.BooksListFragment"
+        android:label="fragment_books_list"
+        tools:layout="@layout/fragment_books_list" />
 </navigation>
