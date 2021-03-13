@@ -2,7 +2,6 @@ package com.exceptioncatchers.bookfinder.bookdetails
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -12,25 +11,21 @@ import com.exceptioncatchers.bookfinder.R
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.bookdetails.viewmodel.BookDetailsViewModel
 import com.exceptioncatchers.bookfinder.bookdetails.viewmodel.BookDetailsViewModelFactory
-import com.exceptioncatchers.bookfinder.books_list.data.BooksListRepository
 import com.exceptioncatchers.bookfinder.databinding.FragmentBookDetailsBinding
 import com.exceptioncatchers.bookfinder.loginregister.models.User
 import com.exceptioncatchers.bookfinder.userlibrary.FragmentUserLibrary
 
 class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
-    private val binding: FragmentBookDetailsBinding by lazy {
-        FragmentBookDetailsBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentBookDetailsBinding
     private val bookDetailsViewModel: BookDetailsViewModel by viewModels {
         BookDetailsViewModelFactory()
     }
     private lateinit var bookId: String
-    private var user = User()
     private val args: FragmentBookDetailsArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        bookId = requireNotNull(requireArguments().getString(BOOK_KEY))
+        binding = FragmentBookDetailsBinding.bind(view)
         bookId = args.bookId
         subscribeBookDetailsResponse(bookId)
     }
@@ -39,23 +34,33 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
         bookDetailsViewModel.getBook(bookId)
         bookDetailsViewModel.getBookDetails()
             .observe(this.viewLifecycleOwner, {
-                subscribeUserInfo(it.userUid)
-                setupBookDetails(it)
+                subscribeUserInfo(it)
             })
     }
 
-    private fun subscribeUserInfo(userId: String) {
-        bookDetailsViewModel.getUser(userId)
+    private fun subscribeUserInfo(book: BookDetails) {
+        bookDetailsViewModel.getUser(book.userUid)
         bookDetailsViewModel.getUserInfo().observe(this.viewLifecycleOwner, { userResponse ->
             userResponse?.let {
-                user = it
+                setupBookDetails(book, it)
             }
         })
     }
 
-    private fun setupBookDetails(book: BookDetails) {
-        binding.bookTitle.append(book.bookTitle)
-        binding.bookAutor.append(book.bookAuthor)
+    private fun setupBookDetails(book: BookDetails, user: User) {
+        with(binding) {
+            bookTitle.text = book.bookTitle
+            bookAutor.text = book.bookAuthor
+            ratingBar.rating = book.bookRating
+            cardViewButton.setOnClickListener { TODO() }
+            bookDescription.text = book.bookDescription
+            //реализовать диалог с полным описанием по клику
+            bookDescription.setOnClickListener { TODO() }
+            //реализовать подгрузку юзернейма и листенер с переходом в профиль
+            bookOwnerUsername.text = user.username
+            bookOwnerUsername.setOnClickListener { goUserLibrary(user.uid) }
+            quantityCount.text = book.sharingCount.toString()
+        }
         this.context?.let {
             Glide.with(it)
                 .asBitmap()
@@ -64,15 +69,6 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
                 .centerCrop()
                 .into(binding.bookPoster)
         }
-        binding.ratingBar.rating = book.bookRating
-        binding.cardViewButton.setOnClickListener { TODO() }
-        binding.bookDescription.append(book.bookDescription)
-        //реализовать диалог с полным описанием по клику
-        binding.bookDescription.setOnClickListener { TODO() }
-        //реализовать подгрузку юзернейма и листенер с переходом в профиль
-        binding.bookOwnerUsername.append(book.userUid)
-        binding.bookOwnerUsername.setOnClickListener { goUserLibrary(user.uid) }
-        binding.quantityCount.append(book.sharingCount.toString())
     }
 
     private fun goUserLibrary(userId: String) {
@@ -81,11 +77,4 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
             .addToBackStack("FragmentBookDetails")
             .commit()
     }
-
-//    companion object {
-//        private const val BOOK_KEY = "book"
-//        fun newInstance(bookId: String): Fragment = FragmentBookDetails().apply {
-//            arguments = bundleOf(BOOK_KEY to bookId)
-//        }
-//    }
 }

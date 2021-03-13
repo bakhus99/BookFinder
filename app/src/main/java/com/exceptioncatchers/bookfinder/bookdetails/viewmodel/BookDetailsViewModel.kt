@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
+import com.exceptioncatchers.bookfinder.books_list.data.BooksListRepository
 import com.exceptioncatchers.bookfinder.loginregister.models.User
-import com.exceptioncatchers.bookfinder.userlibrary.repository.BookLibraryRepoInterface
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class BookDetailsViewModel(
-    private val libraryRepo: BookLibraryRepoInterface
+    private val libraryRepo: BooksListRepository
 ) : ViewModel() {
     private val _bookDetailsResponse: MutableLiveData<BookDetails> = MutableLiveData()
     private val bookDetailsResponse: LiveData<BookDetails> get() = _bookDetailsResponse
@@ -20,13 +20,25 @@ class BookDetailsViewModel(
 
     fun getBook(bookId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _bookDetailsResponse.postValue(libraryRepo.getBookDetails(bookId).value)
+            libraryRepo.getBookDetails(
+                success = {
+                    it?.let { _bookDetailsResponse.postValue(it) }
+                },
+                fail = { TODO() },
+                bookId = bookId
+            )
         }
     }
 
     fun getUser(userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            _user.postValue(libraryRepo.getUser(userId).value)
+            libraryRepo.getUserById(
+                success = {
+                    it?.let { _user.postValue(it) }
+                },
+                fail = { TODO() },
+                userId = userId
+            )
         }
     }
 
