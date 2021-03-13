@@ -1,14 +1,18 @@
 package com.exceptioncatchers.bookfinder.bookdetails.models
 
-import com.exceptioncatchers.bookfinder.loginregister.data.User
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class BookDetails(
-    val bookId: String,
     val bookTitle: String,
-    val bookAutor: String,
+    val bookAuthor: String,
     val bookPoster: String,
     val bookDescription: String,
     val bookRating: Float,
-    val bookOwner: User,
-    val sharingCount: Int
-)
+    //заменить на класс пользователя
+    val sharingCount: Int,
+    val userUid: String
+): Parcelable {
+    constructor() : this("", "", "", "", 1F,1, "")
+}

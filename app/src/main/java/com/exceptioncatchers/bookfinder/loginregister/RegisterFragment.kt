@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exceptioncatchers.bookfinder.R
 import com.exceptioncatchers.bookfinder.databinding.FragmentRegisterBinding
-import com.exceptioncatchers.bookfinder.loginregister.data.User
+import com.exceptioncatchers.bookfinder.loginregister.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -64,7 +64,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val reference = FirebaseStorage.getInstance().getReference("/images/$filename")
         reference.putFile(selectedPhotoUri!!)
             .addOnSuccessListener { path ->
-                Log.d(TAG, "uploadImagetoFirebase: Sucsses photo added")
+                Log.d(TAG, "uploadImageToFirebase: Sucsses photo added")
                 reference.downloadUrl.addOnSuccessListener { 
                     saveUserToFirebase(it.toString())
                 }.addOnFailureListener{
@@ -83,6 +83,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d(TAG, "saveUserToFirebase: saved user to firebase")
+            }
+            .addOnFailureListener {
+                Log.d(TAG, "saveUserToFirebase: ${it.message}")
             }
 
     }
