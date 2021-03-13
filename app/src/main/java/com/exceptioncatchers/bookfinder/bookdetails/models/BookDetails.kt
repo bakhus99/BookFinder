@@ -12,7 +12,8 @@ data class BookDetails(
     val bookRating: Float,
     //заменить на класс пользователя
     val sharingCount: Int,
-    val userUid: String
+    val userUid: String,
+    val bookId: String
 ): Parcelable {
-    constructor() : this("", "", "", "", 1F,1, "")
+    constructor() : this("", "", "", "", 1F,1, "", "")
 }
