@@ -3,28 +3,52 @@ package com.exceptioncatchers.bookfinder.userlibrary.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
-import com.exceptioncatchers.bookfinder.loginregister.data.User
+import com.exceptioncatchers.bookfinder.books_list.data.BooksListRepository
+import com.exceptioncatchers.bookfinder.loginregister.models.User
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 class BookLibraryRepoImpl: BookLibraryRepoInterface {
+    private val repository = BooksListRepository()
     private val _bookDetails: MutableLiveData<BookDetails> = MutableLiveData()
     private val bookDetail: LiveData<BookDetails> get() = _bookDetails
     private val _user: MutableLiveData<User> = MutableLiveData()
     private val user: LiveData<User> get() = _user
     private val _bookList: MutableLiveData<List<BookDetails>> = MutableLiveData()
     private val bookList: LiveData<List<BookDetails>> get() = _bookList
+    private val scope = CoroutineScope(
+        SupervisorJob() +
+                Dispatchers.IO
+    )
 
     override suspend fun getBookDetails(bookId: String): LiveData<BookDetails> {
-        _bookDetails.postValue(TODO())
+        loadBookDetails(bookId)
         return bookDetail
     }
 
     override suspend fun getUser(userName: String): LiveData<User> {
-        _user.postValue(TODO())
-        return user
+        TODO()
     }
 
     override suspend fun getUserBookList(userName: String): LiveData<List<BookDetails>> {
-        _bookList.postValue(TODO())
+        loadBookList()
         return bookList
+    }
+
+    private fun loadBookList() {
+        scope.launch { repository.getBooksListDataFromFirebase(
+            success = { _bookList.postValue(it) },
+            fail = { TODO() }
+        ) }
+    }
+
+    private fun loadBookDetails(bookId: String) {
+        scope.launch { repository.getBookDetails(
+            success = { _bookDetails.postValue(it) },
+            fail = { TODO() },
+            bookId = bookId
+        ) }
     }
 }

@@ -12,7 +12,7 @@ import com.exceptioncatchers.bookfinder.R
 import com.exceptioncatchers.bookfinder.bookdetails.FragmentBookDetails
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.databinding.FragmentUserLibraryBinding
-import com.exceptioncatchers.bookfinder.loginregister.data.User
+import com.exceptioncatchers.bookfinder.loginregister.models.User
 import com.exceptioncatchers.bookfinder.userlibrary.adapter.ItemClickListener
 import com.exceptioncatchers.bookfinder.userlibrary.adapter.UserLibraryAdapter
 import com.exceptioncatchers.bookfinder.userlibrary.viewmodel.UserLibraryViewModel
