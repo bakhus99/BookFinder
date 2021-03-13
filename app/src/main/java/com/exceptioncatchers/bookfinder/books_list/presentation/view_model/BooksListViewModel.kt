@@ -9,18 +9,34 @@ import com.exceptioncatchers.bookfinder.books_list.data.BooksListRepository
 class BooksListViewModel: ViewModel() {
 
     private val repository = BooksListRepository()
-    private val testData = MutableLiveData<List<BookDetails>>()
+    private val booksList = MutableLiveData<List<BookDetails>>()
 
-    fun getTestData(): LiveData<List<BookDetails>> = testData
+    private val testData = MutableLiveData<BookDetails>()
+
+    fun getBooksList(): LiveData<List<BookDetails>> = booksList
 
     fun loadBooksList(){
         repository.getBooksListDataFromFirebase(
+            success = {
+                booksList.value = it
+            },
+            fail = {
+
+            }
+        )
+    }
+
+
+    fun getTestData(): LiveData<BookDetails> = testData
+    fun loadBookDetails(bookId: String){
+        repository.getBookDetails(
             success = {
                 testData.value = it
             },
             fail = {
 
-            }
+            },
+            bookId
         )
     }
 }
