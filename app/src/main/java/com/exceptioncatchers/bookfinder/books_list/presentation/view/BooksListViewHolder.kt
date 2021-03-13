@@ -2,17 +2,25 @@ package com.exceptioncatchers.bookfinder.books_list.presentation.view
 
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.exceptioncatchers.bookfinder.books_list.presentation.model.BookItem
+import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.databinding.BookItemBinding
 
-class BooksListViewHolder(private val binding: BookItemBinding) : RecyclerView.ViewHolder(binding.root) {
+class BooksListViewHolder(
+    private val binding: BookItemBinding,
+    private val action: OnBookClickListener
+) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(bookItem: BookItem) {
-        binding.bookItemTitle.text = bookItem.title
-        binding.bookItemAuthor.text = bookItem.author
+    fun bind(bookDetail: BookDetails) {
+        binding.bookItemTitle.text = bookDetail.bookTitle
+        binding.bookItemAuthor.text = bookDetail.bookAuthor
         Glide
             .with(binding.root)
-            .load("https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ")
+            .load(bookDetail.bookPoster)
             .into(binding.bookItemImage)
+
+        binding.root.setOnClickListener {
+            action.onBookClick(bookDetail.bookId)
+        }
     }
 }
+
