@@ -1,6 +1,7 @@
 package com.exceptioncatchers.bookfinder.bookdetails
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -39,6 +40,7 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
         bookDetailsViewModel.getBook(bookId)
         bookDetailsViewModel.getBookDetails()
             .observe(this.viewLifecycleOwner, {
+                Log.d("ttt", "Book - $it")
                 subscribeUserInfo(it.userUid)
                 setupBookDetails(it)
             })
