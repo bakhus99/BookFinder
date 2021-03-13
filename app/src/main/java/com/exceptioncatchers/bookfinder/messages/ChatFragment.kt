@@ -46,38 +46,39 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     }
 
     private fun listenForMessages() {
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromId = FirebaseAuth.getInstance().uid
+        val toId = args.user.uid
+
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId")
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 val chatMessage = snapshot.getValue(ChatMessage::class.java)
                 if (chatMessage != null) {
                     Log.d(TAG, "onChildAdded: ${chatMessage.text}")
 
-                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid){
+                    if (chatMessage.fromId == FirebaseAuth.getInstance().uid) {
                         val currentUser = MessagesFragment.currentUser ?: return
-                        adapter.add(ChatToItem(chatMessage.text,currentUser))
-                    }else{
+                        adapter.add(ChatToItem(chatMessage.text, currentUser))
+                    } else {
                         val toUser = args.user
-                        adapter.add(ChatFromItem(chatMessage.text,toUser))
+                        adapter.add(ChatFromItem(chatMessage.text, toUser))
                     }
 
                 }
+                binding.rvChatMsg.scrollToPosition(adapter.itemCount - 1)
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
+
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("Not yet implemented")
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
             }
 
 
@@ -87,17 +88,27 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
     private fun performSendMsg() {
         val message = binding.etUserMsg.text.toString()
 
-        val ref = FirebaseDatabase.getInstance().getReference("/messages").push()
         val fromId = FirebaseAuth.getInstance().uid
         val toId = args.user.uid
         if (fromId == null) return
+
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromId/$toId").push()
+        val toRef =
+            FirebaseDatabase.getInstance().getReference("/user-messages/$toId/$fromId").push()
+
         val chatMessage =
             ChatMessage(ref.key!!, message, fromId, toId, System.currentTimeMillis() / 1000)
 
         ref.setValue(chatMessage)
             .addOnSuccessListener {
                 Log.d(TAG, "performSendMsg: ${ref.key}")
+                binding.rvChatMsg.scrollToPosition(adapter.itemCount - 1)
+                binding.etUserMsg.text?.clear()
             }
+
+        toRef.setValue(chatMessage).addOnSuccessListener {
+            Log.d(TAG, "performSendMsg: ${toRef.key}")
+        }
 
     }
 
