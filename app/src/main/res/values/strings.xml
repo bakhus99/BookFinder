@@ -24,4 +24,13 @@
     <string name="temp_sharing">23</string>
     <string name="user_name">Pavel Lukyanov</string>
     <string name="temp_user_info">Люблю прозу и антиутопии. Большая коллекция книг. Книги возвращаю во время.</string>
+    <string name="add_book_title">Добавить книгу</string>
+    <string name="book_title_tv">Название</string>
+    <string name="add_book_author_title">Автор</string>
+    <string name="add_book_title_hint">Введите название книги</string>
+    <string name="add_book_author_hint">Введите автора книги</string>
+    <string name="add_book_description_title">Краткое описание</string>
+    <string name="add_book_poster_title">Обложка</string>
+    <string name="add_book_description_hint">Введите краткое описание книги</string>
+    <string name="add_book_button">Добавить книгу</string>
 </resources>
