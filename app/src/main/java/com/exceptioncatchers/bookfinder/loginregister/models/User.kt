@@ -1,4 +1,4 @@
-package com.exceptioncatchers.bookfinder.loginregister.data
+package com.exceptioncatchers.bookfinder.loginregister.models
 
 data class User(
     val uid: String,
