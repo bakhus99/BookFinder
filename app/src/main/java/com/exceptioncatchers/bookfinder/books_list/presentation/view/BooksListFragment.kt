@@ -1,7 +1,6 @@
 package com.exceptioncatchers.bookfinder.books_list.presentation.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
@@ -35,7 +34,8 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
 
     private fun initViewModel() {
         booksListViewModel.loadBooksList()
-        booksListViewModel.getTestData().observe(this.viewLifecycleOwner, ::handleBooksList)
+        booksListViewModel.getBooksList().observe(this.viewLifecycleOwner, ::handleBooksList)
+
     }
 
     private fun handleBooksList(booksList: List<BookDetails>?) {
@@ -66,6 +66,13 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
         Toast.makeText(requireContext(), "****** $bookId *****", Toast.LENGTH_SHORT).show()
         val action = BooksListFragmentDirections.actionBooksListFragmentToFragmentBookDetails2(bookId)
         findNavController().navigate(action)
+
+//        booksListViewModel.loadBookDetails(bookId)
+//        booksListViewModel.getTestData().observe(this.viewLifecycleOwner, ::handleTest)
+//    }
+//
+//    private fun handleTest(bookDetails: BookDetails?) {
+//        Toast.makeText(requireContext(), "****** $bookDetails *****", Toast.LENGTH_LONG).show()
     }
 }
 
