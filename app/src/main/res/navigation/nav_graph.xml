@@ -39,5 +39,18 @@
         android:id="@+id/messagesFragment"
         android:name="com.exceptioncatchers.bookfinder.messages.MessagesFragment"
         android:label="fragment_messages"
-        tools:layout="@layout/fragment_messages" />
+        tools:layout="@layout/fragment_messages" >
+        <action
+            android:id="@+id/action_messagesFragment_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.exceptioncatchers.bookfinder.messages.ChatFragment"
+        android:label="Chat"
+        tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="user"
+            app:argType="com.exceptioncatchers.bookfinder.loginregister.models.User" />
+    </fragment>
 </navigation>

@@ -8,7 +8,7 @@ import com.exceptioncatchers.bookfinder.loginregister.models.User
 import com.xwray.groupie.viewbinding.BindableItem
 
 
-class UserItem(private val user: User) : BindableItem<UserRowMessagesBinding>() {
+class UserItem( val user: User) : BindableItem<UserRowMessagesBinding>() {
 
     override fun getLayout() = R.layout.user_row_messages
 
