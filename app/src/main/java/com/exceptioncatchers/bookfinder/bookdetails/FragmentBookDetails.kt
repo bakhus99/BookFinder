@@ -1,9 +1,8 @@
 package com.exceptioncatchers.bookfinder.bookdetails
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -13,7 +12,6 @@ import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.bookdetails.viewmodel.BookDetailsViewModel
 import com.exceptioncatchers.bookfinder.bookdetails.viewmodel.BookDetailsViewModelFactory
 import com.exceptioncatchers.bookfinder.databinding.FragmentBookDetailsBinding
-import kotlinx.android.synthetic.main.fragment_book_details.*
 
 class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     private val binding: FragmentBookDetailsBinding by lazy {
@@ -22,13 +20,16 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     private val bookDetailsViewModel: BookDetailsViewModel by viewModels {
         BookDetailsViewModelFactory()
     }
+    private lateinit var bookId: String
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeBookDetailsResponse()
+        bookId = requireNotNull(requireArguments().getString(BOOK_KEY))
+        subscribeBookDetailsResponse(bookId)
     }
 
-    private fun subscribeBookDetailsResponse() {
+    private fun subscribeBookDetailsResponse(bookId: String) {
+        bookDetailsViewModel.getBook(bookId)
         bookDetailsViewModel.getBookDetails()
             .observe(this.viewLifecycleOwner, { setupBookDetails(it) })
     }
@@ -56,6 +57,9 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     }
 
     companion object {
-        fun newInstance(book: BookDetails): Fragment = FragmentBookDetails()
+        private const val BOOK_KEY = "book"
+        fun newInstance(bookId: String): Fragment = FragmentBookDetails().apply {
+            arguments = bundleOf(BOOK_KEY to bookId)
+        }
     }
 }
