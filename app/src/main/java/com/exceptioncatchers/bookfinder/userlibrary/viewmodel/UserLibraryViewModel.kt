@@ -18,12 +18,6 @@ class UserLibraryViewModel(
     private val _userInfo: MutableLiveData<User> = MutableLiveData()
     private val userInfo: LiveData<User> get() = _userInfo
 
-    fun selectedBook(book: BookDetails) {
-        viewModelScope.launch(Dispatchers.IO) {
-            libraryRepo.selectedBookItem(book)
-        }
-    }
-
     fun getUser(userName: String) {
         viewModelScope.launch(Dispatchers.IO) {
             _userInfo.postValue(libraryRepo.getUser(userName).value)

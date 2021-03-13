@@ -50,6 +50,7 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
         binding.bookDescription.append(book.bookDescription)
         //реализовать диалог с полным описанием по клику
         binding.bookDescription.setOnClickListener { TODO() }
+        binding.bookDescription.maxLines = 0
         //реализовать подгрузку юзернейма и листенер с переходом в профиль
         binding.bookOwnerUsername.append(book.bookOwner.username)
         binding.bookOwnerUsername.setOnClickListener { TODO() }

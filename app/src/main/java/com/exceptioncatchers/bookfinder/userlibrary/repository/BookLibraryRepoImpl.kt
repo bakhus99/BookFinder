@@ -8,16 +8,23 @@ import com.exceptioncatchers.bookfinder.loginregister.data.User
 class BookLibraryRepoImpl: BookLibraryRepoInterface {
     private val _bookDetails: MutableLiveData<BookDetails> = MutableLiveData()
     private val bookDetail: LiveData<BookDetails> get() = _bookDetails
+    private val _user: MutableLiveData<User> = MutableLiveData()
+    private val user: LiveData<User> get() = _user
+    private val _bookList: MutableLiveData<List<BookDetails>> = MutableLiveData()
+    private val bookList: LiveData<List<BookDetails>> get() = _bookList
 
     override suspend fun getBookDetails(bookId: String): LiveData<BookDetails> {
-        TODO("Not yet implemented")
+        _bookDetails.postValue(TODO())
+        return bookDetail
     }
 
     override suspend fun getUser(userName: String): LiveData<User> {
-        TODO("Not yet implemented")
+        _user.postValue(TODO())
+        return user
     }
 
     override suspend fun getUserBookList(userName: String): LiveData<List<BookDetails>> {
-        TODO("Not yet implemented")
+        _bookList.postValue(TODO())
+        return bookList
     }
 }
