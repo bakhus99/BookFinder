@@ -10,32 +10,55 @@ import kotlinx.coroutines.*
 
 class BookLibraryRepoImpl: BookLibraryRepoInterface {
     private val repository = BooksListRepository()
-    private val _bookDetails: MutableLiveData<BookDetails> = MutableLiveData()
-    private val bookDetail: LiveData<BookDetails> get() = _bookDetails
-    private val _user: MutableLiveData<User> = MutableLiveData()
-    private val user: LiveData<User> get() = _user
-    private val _bookList: MutableLiveData<List<BookDetails>> = MutableLiveData()
-    private val bookList: LiveData<List<BookDetails>> get() = _bookList
-    private val scope = CoroutineScope(
-        SupervisorJob() +
-                Dispatchers.IO
-    )
-    private val handler = CoroutineExceptionHandler { _, exception ->
-        Log.d(LOG_TAG, "CoroutineExceptionHandler got $exception")
+//    private val _bookDetails: MutableLiveData<BookDetails> = MutableLiveData()
+//    private val bookDetail: LiveData<BookDetails> get() = _bookDetails
+//    private val _user: MutableLiveData<User> = MutableLiveData()
+//    private val user: LiveData<User> get() = _user
+//    private val _bookList: MutableLiveData<List<BookDetails>> = MutableLiveData()
+//    private val bookList: LiveData<List<BookDetails>> get() = _bookList
+//    private val scope = CoroutineScope(
+//        SupervisorJob() +
+//                Dispatchers.IO
+//    )
+
+
+//    private var bookDetails = BookDetails()
+    private var userInfo = User()
+    private var bookList: MutableList<BookDetails> = mutableListOf()
+
+    override suspend fun getBookDetails(bookId: String): BookDetails {
+        var bookDetails = BookDetails()
+       repository.getBookDetails(
+            success = {
+                Log.d(TAG, "loadBookDetails -> $it")
+                it?.let { bookDetails = it }
+            },
+            fail = { TODO() },
+            bookId = bookId
+        )
+        return bookDetails
     }
 
-    override suspend fun getBookDetails(bookId: String): LiveData<BookDetails> {
-        loadBookDetails(bookId)
-        return bookDetail
+    override suspend fun getUser(userId: String): User {
+        repository.getUserById(
+            success = {
+                Log.d(TAG, "loadUserInfo -> $it")
+                it?.let { userInfo = it }
+            },
+            fail = { TODO() },
+            userId = userId
+        )
+        return userInfo
     }
 
-    override suspend fun getUser(userId: String): LiveData<User> {
-        loadUserInfo(userId)
-        return user
-    }
-
-    override suspend fun getUserBookList(userName: String): LiveData<List<BookDetails>> {
-        loadBookList()
+    override suspend fun getUserBookList(userName: String): List<BookDetails> {
+        repository.getBooksListDataFromFirebase(
+            success = {
+                Log.d(TAG, "loadBookList -> ${it?.size}")
+                it?.let { bookList.addAll(it) }
+            },
+            fail = { TODO() }
+        )
         return bookList
     }
 
@@ -43,30 +66,7 @@ class BookLibraryRepoImpl: BookLibraryRepoInterface {
         TODO("Not yet implemented")
     }
 
-    private suspend fun loadUserInfo(userId: String) {
-        scope.async(handler) { repository.getUserById(
-            success = { _user.postValue(it) },
-            fail = { Log.d(LOG_TAG, it) },
-            userId = userId
-        ) }.await()
-    }
-
-    private suspend fun loadBookList() {
-        scope.async(handler) { repository.getBooksListDataFromFirebase(
-            success = { _bookList.postValue(it) },
-            fail = { Log.d(LOG_TAG, it) }
-        ) }.await()
-    }
-
-    private suspend fun loadBookDetails(bookId: String) {
-        scope.async(handler) { repository.getBookDetails(
-            success = { _bookDetails.postValue(it) },
-            fail = { Log.d(LOG_TAG, it) },
-            bookId = bookId
-        ) }.await()
-    }
-
     companion object {
-        private const val LOG_TAG = "BookLibraryRepoImpl"
+        private const val TAG = "ttt"
     }
 }

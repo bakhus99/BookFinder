@@ -19,16 +19,15 @@ import com.exceptioncatchers.bookfinder.userlibrary.viewmodel.UserLibraryViewMod
 import com.exceptioncatchers.bookfinder.userlibrary.viewmodel.UserLibraryViewModelFactory
 
 class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
-    private val binding: FragmentUserLibraryBinding by lazy {
-        FragmentUserLibraryBinding.inflate(layoutInflater)
-    }
     private val userLibraryViewModel: UserLibraryViewModel by viewModels {
         UserLibraryViewModelFactory()
     }
     private lateinit var userId: String
+    private lateinit var binding: FragmentUserLibraryBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentUserLibraryBinding.bind(view)
         userId = requireNotNull(requireArguments().getString(USER_KEY))
         subscribeBookLibrary(userId)
     }
@@ -49,30 +48,31 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
                 .centerCrop()
                 .into(binding.userImage)
         }
-        binding.userName.append(user.username)
+        binding.userName.text = user.username
     }
 
     private fun initRecycler(bookList: List<BookDetails>) {
         val adapter = UserLibraryAdapter(bookList, clickListener)
         binding.recyclerBookLibrary.adapter = adapter
         binding.recyclerBookLibrary.layoutManager = GridLayoutManager(context, COLUMN)
+        binding.userLibrary.text = bookList.size.toString()
     }
 
     private val clickListener = object : ItemClickListener {
         override fun onItemClicked(book: BookDetails) {
-            showBookDetailsFragment(book)
+//            showBookDetailsFragment(book)
         }
     }
 
-    private fun showBookDetailsFragment(book: BookDetails) {
+//    private fun showBookDetailsFragment(book: BookDetails) {
 //        requireFragmentManager().beginTransaction()
-//            .replace(R.id.nav_host_fragment, FragmentBookDetails.newInstance(book.bookId))
+//            .replace(R.id.nav_host_fragment, FragmentBookDetails())
 //            .addToBackStack("FragmentBookDetails")
 //            .commit()
-    }
+//    }
 
     companion object {
-        private const val COLUMN = 3
+        private const val COLUMN = 2
         private const val USER_KEY = "user"
         fun newInstance(userId: String): Fragment = FragmentUserLibrary().apply {
             arguments = bundleOf(USER_KEY to userId)
