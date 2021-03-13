@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_startFragment_to_booksListFragment"
             app:destination="@id/booksListFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -63,13 +66,5 @@
         android:id="@+id/booksListFragment"
         android:name="com.exceptioncatchers.bookfinder.books_list.presentation.view.BooksListFragment"
         android:label="fragment_books_list"
-        tools:layout="@layout/fragment_books_list" >
-        <action
-            android:id="@+id/action_booksListFragment_to_fragmentBookDetails"
-            app:destination="@id/fragmentBookDetails" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentBookDetails"
-        android:name="com.exceptioncatchers.bookfinder.bookdetails.FragmentBookDetails"
-        android:label="FragmentBookDetails" />
+        tools:layout="@layout/fragment_books_list" />
 </navigation>

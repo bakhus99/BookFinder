@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.exceptioncatchers.bookfinder.databinding.FragmentStartBinding
+import com.google.firebase.auth.FirebaseAuth
 
 
 class StartFragment : Fragment(R.layout.fragment_start) {
@@ -15,6 +16,11 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
 
+//        val currentUser = FirebaseAuth.getInstance().currentUser
+//        if (currentUser != null){
+//            val action = StartFragmentDirections.actionStartFragmentToBooksListFragment()
+//            findNavController().navigate(action)
+//        }
         binding.btnLogin.setOnClickListener {
             val action = StartFragmentDirections.actionStartFragmentToLoginFragment()
             findNavController().navigate(action)
@@ -25,6 +31,11 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         }
         binding.btnTest.setOnClickListener {
             val action = StartFragmentDirections.actionStartFragmentToBooksListFragment()
+            findNavController().navigate(action)
+        }
+
+        binding.btnLocation.setOnClickListener {
+            val action = StartFragmentDirections.actionStartFragmentToLocationFragment()
             findNavController().navigate(action)
         }
 
