@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/userImage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:src="@drawable/empty_avatar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userRatingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:text="@string/user_rating"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/userRating"
+        app:layout_constraintStart_toEndOf="@+id/userImage"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <TextView
+        android:id="@+id/userRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/button_get_sharing"
+        android:text="@string/temp_rating"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/userRatingTitle"
+        app:layout_constraintEnd_toEndOf="@+id/userRatingTitle"
+        app:layout_constraintStart_toStartOf="@+id/userRatingTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userLibraryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/user_library_title"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/userLibrary"
+        app:layout_constraintStart_toEndOf="@+id/userRatingTitle"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <TextView
+        android:id="@+id/userLibrary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/button_get_sharing"
+        android:text="@string/temp_library"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/userLibraryTitle"
+        app:layout_constraintEnd_toEndOf="@+id/userLibraryTitle"
+        app:layout_constraintStart_toStartOf="@+id/userLibraryTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userGetTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/user_get_title"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/userGet"
+        app:layout_constraintStart_toEndOf="@+id/userLibraryTitle"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <TextView
+        android:id="@+id/userGet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/button_get_sharing"
+        android:text="@string/temp_get"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/userGetTitle"
+        app:layout_constraintEnd_toEndOf="@+id/userGetTitle"
+        app:layout_constraintStart_toStartOf="@+id/userGetTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userSharingTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:text="@string/user_sharing"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/userSharing"
+        app:layout_constraintStart_toEndOf="@+id/userGetTitle"
+        tools:layout_editor_absoluteY="79dp" />
+
+    <TextView
+        android:id="@+id/userSharing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="22sp"
+        android:textColor="@color/button_get_sharing"
+        android:text="@string/temp_sharing"
+        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/userSharingTitle"
+        app:layout_constraintEnd_toEndOf="@+id/userSharingTitle"
+        app:layout_constraintStart_toStartOf="@+id/userSharingTitle"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/userName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:text="@string/user_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userImage" />
+
+    <TextView
+        android:id="@+id/userInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:text="@string/temp_user_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/userInfo"
+        app:layout_constraintStart_toEndOf="@+id/userName"
+        app:layout_constraintTop_toTopOf="@+id/userName"
+        app:srcCompat="@drawable/ic_mail" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerBookLibrary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userInfo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

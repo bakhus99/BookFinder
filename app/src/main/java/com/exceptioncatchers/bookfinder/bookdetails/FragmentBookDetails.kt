@@ -50,8 +50,12 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
         //реализовать диалог с полным описанием по клику
         binding.bookDescription.setOnClickListener { TODO() }
         //реализовать подгрузку юзернейма и листенер с переходом в профиль
-        binding.bookOwnerUsername.append(TODO())
+        binding.bookOwnerUsername.append(book.bookOwner.username)
         binding.bookOwnerUsername.setOnClickListener { TODO() }
         binding.quantityCount.append(book.sharingCount.toString())
+    }
+
+    companion object {
+        fun newInstance(book: BookDetails): Fragment = FragmentBookDetails()
     }
 }

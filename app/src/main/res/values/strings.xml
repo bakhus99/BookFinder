@@ -14,4 +14,14 @@
     <string name="username">username</string>
     <string name="sharing_count">156</string>
     <string name="raz">раз</string>
+    <string name="user_rating">Рейтинг</string>
+    <string name="temp_rating">5.0</string>
+    <string name="user_library_title">Библиотека</string>
+    <string name="temp_library">130</string>
+    <string name="user_get_title">Брал</string>
+    <string name="temp_get">12</string>
+    <string name="user_sharing">Расшарил</string>
+    <string name="temp_sharing">23</string>
+    <string name="user_name">Pavel Lukyanov</string>
+    <string name="temp_user_info">Люблю прозу и антиутопии. Большая коллекция книг. Книги возвращаю во время.</string>
 </resources>
