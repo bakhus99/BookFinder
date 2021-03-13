@@ -2,4 +2,16 @@
     <string name="app_name">BookFinder</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="temp_book_title">Скотный Двор</string>
+    <string name="temp_book_autor">Джордж Оруэлл</string>
+    <string name="get_a_sharing">ВЗЯТЬ КНИГУ В ШЕРИНГ</string>
+    <string name="book_description">Описание</string>
+    <string name="temp_book_description">В книгу включена не только легендарная повесть-притча Оруэлла "Скотный двор", но и эссе разных лет – "Литература и тоталитаризм", "Писатели и Левиафан", "Заметки о национализме" и другие.
+Что привлекает читателя в художественной и публицистической прозе этого запретного в тоталитарных странах автора?
+В первую очередь – острейшие проблемы политической и культурной жизни 40-х годов XX века, которые и сегодня продолжают оставаться актуальными. А также объективность в оценке событий и яркая авторская индивидуальность, помноженные на истинное литературное мастерство.</string>
+    <string name="book_owner">Владелец:</string>
+    <string name="quantity_sharing_title">Была в шеринге:</string>
+    <string name="username">username</string>
+    <string name="sharing_count">156</string>
+    <string name="raz">раз</string>
 </resources>
