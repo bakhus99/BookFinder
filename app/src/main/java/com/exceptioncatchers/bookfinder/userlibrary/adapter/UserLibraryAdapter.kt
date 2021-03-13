@@ -39,7 +39,7 @@ class UserLibraryViewHolder(private val binding: BookHolderBinding) : RecyclerVi
             .centerCrop()
             .into(binding.bookImg)
         binding.bookName.append(book.bookTitle)
-        binding.bookWriter.append(book.bookAutor)
+        binding.bookWriter.append(book.bookAuthor)
     }
 }
 
