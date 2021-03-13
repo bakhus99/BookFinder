@@ -15,10 +15,6 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
 
-        binding.test.setOnClickListener {
-            val action = StartFragmentDirections.actionStartFragmentToBooksListFragment()
-            findNavController().navigate(action)
-        }
     }
 
 
