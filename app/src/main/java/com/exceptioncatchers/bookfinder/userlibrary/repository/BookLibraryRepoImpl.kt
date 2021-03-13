@@ -38,6 +38,10 @@ class BookLibraryRepoImpl: BookLibraryRepoInterface {
         return bookList
     }
 
+    override suspend fun addNewBook(book: BookDetails) {
+        TODO("Not yet implemented")
+    }
+
     private fun loadUserInfo(userId: String) {
         scope.launch { repository.getUserById(
             success = { _user.postValue(it) },
