@@ -10,4 +10,6 @@ interface BookLibraryRepoInterface {
     suspend fun getUser(userName: String): LiveData<User>
 
     suspend fun getUserBookList(userName: String): LiveData<List<BookDetails>>
+
+    suspend fun addNewBook(book: BookDetails)
 }

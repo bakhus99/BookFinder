@@ -37,6 +37,10 @@ class BookLibraryRepoImpl: BookLibraryRepoInterface {
         return bookList
     }
 
+    override suspend fun addNewBook(book: BookDetails) {
+        TODO("Not yet implemented")
+    }
+
     private fun loadBookList() {
         scope.launch { repository.getBooksListDataFromFirebase(
             success = { _bookList.postValue(it) },
