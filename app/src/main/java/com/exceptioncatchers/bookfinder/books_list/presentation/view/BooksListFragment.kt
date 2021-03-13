@@ -3,13 +3,11 @@ package com.exceptioncatchers.bookfinder.books_list.presentation.view
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.exceptioncatchers.bookfinder.R
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.books_list.presentation.model.BookItem
@@ -17,10 +15,10 @@ import com.exceptioncatchers.bookfinder.books_list.presentation.view_model.Books
 import com.exceptioncatchers.bookfinder.books_list.presentation.view_model.BooksListViewModelFactory
 import com.exceptioncatchers.bookfinder.databinding.FragmentBooksListBinding
 
-class BooksListFragment : Fragment(R.layout.fragment_books_list) {
+class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickListener {
 
-    private lateinit var binding: FragmentBooksListBinding
-    private val adapter = BooksListAdapter()
+    private lateinit var bindingBooksList: FragmentBooksListBinding
+    private val adapter = BooksListAdapter(this)
 
     private val booksListViewModel: BooksListViewModel by viewModels{
         BooksListViewModelFactory()
@@ -28,7 +26,7 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentBooksListBinding.bind(view)
+        bindingBooksList = FragmentBooksListBinding.bind(view)
 
         setupListeners()
         initRecyclerView()
@@ -44,6 +42,7 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list) {
         Log.d("TAG", "******************* ${booksList?.get(0)?.bookTitle}")
         Log.d("TAG", "******************* ${booksList?.get(1)?.bookTitle}")
         Log.d("TAG", "******************* ${booksList?.get(2)?.bookTitle}")
+        adapter.setData(booksList!!)
     }
 
     private fun mockData(): List<BookItem>{
@@ -57,14 +56,19 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list) {
     }
 
     private fun initRecyclerView() {
-        binding.booksListRecyclerView.hasFixedSize()
-        binding.booksListRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.booksListRecyclerView.adapter = adapter
-        adapter.setData(mockData())
+        bindingBooksList.booksListRecyclerView.hasFixedSize()
+        bindingBooksList.booksListRecyclerView.layoutManager = LinearLayoutManager(context)
+        bindingBooksList.booksListRecyclerView.adapter = adapter
     }
 
     private fun setupListeners() {
 
+    }
+
+    override fun onBookClick(bookId: String) {
+        Toast.makeText(requireContext(), "****** $bookId *****", Toast.LENGTH_SHORT).show()
+        val action = BooksListFragmentDirections.actionBooksListFragmentToFragmentBookDetails()
+        findNavController().navigate(action)
     }
 }
 
