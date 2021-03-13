@@ -28,6 +28,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         binding.btnLogin.setOnClickListener {
             userSingIn()
+
         }
 
     }
@@ -38,6 +39,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email,password)
             .addOnSuccessListener {
+                val action = LoginFragmentDirections.actionLoginFragmentToMessagesFragment()
+                findNavController().navigate(action)
                 Toast.makeText(context,"Loged in",Toast.LENGTH_SHORT).show()
             }
     }

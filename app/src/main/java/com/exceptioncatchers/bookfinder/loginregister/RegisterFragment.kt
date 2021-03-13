@@ -84,6 +84,9 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             .addOnSuccessListener {
                 Log.d(TAG, "saveUserToFirebase: saved user to firebase")
             }
+            .addOnFailureListener {
+                Log.d(TAG, "saveUserToFirebase: ${it.message}")
+            }
 
     }
 
