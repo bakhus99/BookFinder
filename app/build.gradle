@@ -72,4 +72,7 @@ dependencies {
     implementation "com.xwray:groupie:2.9.0"
     implementation "com.xwray:groupie-viewbinding:2.9.0"
 
+    //for location
+    implementation "com.google.android.gms:play-services-location:18.0.0"
+
 }

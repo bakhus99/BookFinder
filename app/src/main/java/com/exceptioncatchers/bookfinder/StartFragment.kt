@@ -28,5 +28,10 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             findNavController().navigate(action)
         }
 
+        binding.btnLocation.setOnClickListener {
+            val action = StartFragmentDirections.actionStartFragmentToLocationFragment()
+            findNavController().navigate(action)
+        }
+
     }
 }
