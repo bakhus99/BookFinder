@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.exceptioncatchers.bookfinder.R
@@ -25,10 +26,12 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     }
     private lateinit var bookId: String
     private var user = User()
+    private val args: FragmentBookDetailsArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        bookId = requireNotNull(requireArguments().getString(BOOK_KEY))
+//        bookId = requireNotNull(requireArguments().getString(BOOK_KEY))
+        bookId = args.bookId
         subscribeBookDetailsResponse(bookId)
     }
 
@@ -79,10 +82,10 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
             .commit()
     }
 
-    companion object {
-        private const val BOOK_KEY = "book"
-        fun newInstance(bookId: String): Fragment = FragmentBookDetails().apply {
-            arguments = bundleOf(BOOK_KEY to bookId)
-        }
-    }
+//    companion object {
+//        private const val BOOK_KEY = "book"
+//        fun newInstance(bookId: String): Fragment = FragmentBookDetails().apply {
+//            arguments = bundleOf(BOOK_KEY to bookId)
+//        }
+//    }
 }

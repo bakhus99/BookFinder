@@ -74,5 +74,10 @@
     <fragment
         android:id="@+id/fragmentBookDetails"
         android:name="com.exceptioncatchers.bookfinder.bookdetails.FragmentBookDetails"
-        android:label="FragmentBookDetails" />
+        android:label="FragmentBookDetails" >
+        <argument
+            android:name="bookId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>
