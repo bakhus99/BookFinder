@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.exceptioncatchers.bookfinder.R
+import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.books_list.presentation.model.BookItem
 import com.exceptioncatchers.bookfinder.books_list.presentation.view_model.BooksListViewModel
 import com.exceptioncatchers.bookfinder.books_list.presentation.view_model.BooksListViewModelFactory
@@ -39,8 +40,10 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list) {
         booksListViewModel.getTestData().observe(this.viewLifecycleOwner, ::handleBooksList)
     }
 
-    private fun handleBooksList(s: String?) {
-        Log.d("TAG", "******************* $s")
+    private fun handleBooksList(booksList: List<BookDetails>?) {
+        Log.d("TAG", "******************* ${booksList?.get(0)?.bookTitle}")
+        Log.d("TAG", "******************* ${booksList?.get(1)?.bookTitle}")
+        Log.d("TAG", "******************* ${booksList?.get(2)?.bookTitle}")
     }
 
     private fun mockData(): List<BookItem>{
