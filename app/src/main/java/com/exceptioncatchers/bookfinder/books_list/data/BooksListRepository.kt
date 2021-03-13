@@ -42,10 +42,8 @@ class BooksListRepository {
         val ref = FirebaseDatabase.getInstance().getReference("books/$bookId")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                snapshot.children.forEach {
-                val book = it.getValue(BookDetails::class.java)
+                val book = snapshot.getValue(BookDetails::class.java)
                 success(book)
-                }
             }
 
             override fun onCancelled(error: DatabaseError) {
