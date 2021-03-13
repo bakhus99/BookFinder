@@ -66,5 +66,13 @@
         android:id="@+id/booksListFragment"
         android:name="com.exceptioncatchers.bookfinder.books_list.presentation.view.BooksListFragment"
         android:label="fragment_books_list"
-        tools:layout="@layout/fragment_books_list" />
+        tools:layout="@layout/fragment_books_list" >
+        <action
+            android:id="@+id/action_booksListFragment_to_fragmentBookDetails2"
+            app:destination="@id/fragmentBookDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentBookDetails"
+        android:name="com.exceptioncatchers.bookfinder.bookdetails.FragmentBookDetails"
+        android:label="FragmentBookDetails" />
 </navigation>
