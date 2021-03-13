@@ -1,10 +1,12 @@
 package com.exceptioncatchers.bookfinder.books_list.presentation.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +31,16 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list) {
 
         setupListeners()
         initRecyclerView()
+        initViewModel()
+    }
+
+    private fun initViewModel() {
+        booksListViewModel.loadBooksList()
+        booksListViewModel.getTestData().observe(this.viewLifecycleOwner, ::handleBooksList)
+    }
+
+    private fun handleBooksList(s: String?) {
+        Log.d("TAG", "******************* $s")
     }
 
     private fun mockData(): List<BookItem>{

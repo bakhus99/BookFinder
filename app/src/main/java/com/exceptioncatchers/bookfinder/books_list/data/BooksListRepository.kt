@@ -11,16 +11,16 @@ import com.google.firebase.database.ValueEventListener
 class BooksListRepository {
 
     fun getBooksListDataFromFirebase(
-        success: (User) -> Unit,
+        success: (User?) -> Unit,
         fail: (String) -> Unit
     ) {
-        var user = User()
+        var currentUser: User? = null
         val uid = FirebaseAuth.getInstance().uid
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                user = snapshot.getValue(User::class.java)!!
-                success(user)
+                currentUser = snapshot.getValue(User::class.java)
+                success(currentUser)
             }
 
             override fun onCancelled(error: DatabaseError) {

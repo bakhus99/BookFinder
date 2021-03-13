@@ -1,13 +1,25 @@
 package com.exceptioncatchers.bookfinder.books_list.presentation.view_model
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.exceptioncatchers.bookfinder.books_list.data.BooksListRepository
 
 class BooksListViewModel: ViewModel() {
 
-    val repository = BooksListRepository()
-    val testData = MutableLiveData<String>()
+    private val repository = BooksListRepository()
+    private val testData = MutableLiveData<String>()
 
-    fun get
+    fun getTestData(): LiveData<String> = testData
+
+    fun loadBooksList(){
+        repository.getBooksListDataFromFirebase(
+            success = {
+                testData.value = it?.username
+            },
+            fail = {
+
+            }
+        )
+    }
 }
