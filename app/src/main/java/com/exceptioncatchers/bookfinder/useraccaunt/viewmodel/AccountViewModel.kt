@@ -18,7 +18,14 @@ class AccountViewModel(private val repository: BooksListRepository) : ViewModel(
 
     fun requestUserSharingList(userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-
+            //метод получения списка книг юзера
+            repository.getUserById(
+                success = {
+                    it?.let { _userInfo.postValue(it) }
+                },
+                fail = { TODO() },
+                userId = userId
+            )
         }
     }
 

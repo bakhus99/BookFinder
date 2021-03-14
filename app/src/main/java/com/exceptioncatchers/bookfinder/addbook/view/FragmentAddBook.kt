@@ -10,6 +10,7 @@ import com.exceptioncatchers.bookfinder.addbook.viewmodel.AddBookViewModel
 import com.exceptioncatchers.bookfinder.addbook.viewmodel.AddBookViewModelFactory
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.databinding.FragmentAddBookBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class FragmentAddBook : Fragment(R.layout.fragment_add_book) {
     private lateinit var binding: FragmentAddBookBinding
@@ -28,12 +29,13 @@ class FragmentAddBook : Fragment(R.layout.fragment_add_book) {
         val author = binding.addBookAuthorEdtx.text.toString()
         val poster = binding.addBookPosterEdtx.text.toString()
         val descrip = binding.addBookDescriptionEdtx.text.toString()
+        val uid = FirebaseAuth.getInstance().uid
         val newBook = BookDetails(
             title,
             author,
             poster,
             descrip,
-            0F, 0, "", ""
+            0F, 0, uid!!, ""
         )
         binding.addBookBut.setOnClickListener {
             addBookViewModel.addBook(newBook).observe(this.viewLifecycleOwner, { responseMessage ->

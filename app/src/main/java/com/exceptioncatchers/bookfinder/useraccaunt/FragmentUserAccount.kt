@@ -16,24 +16,26 @@ import com.exceptioncatchers.bookfinder.useraccaunt.adapter.UserSharingListAdapt
 import com.exceptioncatchers.bookfinder.useraccaunt.viewmodel.AccountViewModel
 import com.exceptioncatchers.bookfinder.useraccaunt.viewmodel.AccountViewModelFactory
 import com.exceptioncatchers.bookfinder.userlibrary.adapter.ItemClickListener
+import com.google.firebase.auth.FirebaseAuth
 
-class FragmentUserAccount : Fragment(R.layout.fragment_user_account){
+class FragmentUserAccount : Fragment(R.layout.fragment_user_account) {
     private val viewModel: AccountViewModel by viewModels { AccountViewModelFactory() }
     private lateinit var binding: FragmentUserAccountBinding
-    private var userId: String = ""
+    private var userId: String? = FirebaseAuth.getInstance().uid
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserAccountBinding.bind(view)
-        //реализовать передачу юзер айди через аргументы
         subscribeResponseUserList()
     }
 
     private fun subscribeResponseUserList() {
-        viewModel.requestUserInfo(userId)
-        viewModel.responseUserInfo().observe(this.viewLifecycleOwner, {setupUserInfo(it)})
-        viewModel.requestUserSharingList(userId)
-        viewModel.responseUserList().observe(this.viewLifecycleOwner, {initRecycler(it)})
+        userId?.let {
+            viewModel.requestUserInfo(userId!!)
+            viewModel.responseUserInfo().observe(this.viewLifecycleOwner, { setupUserInfo(it) })
+            viewModel.requestUserSharingList(userId!!)
+            viewModel.responseUserList().observe(this.viewLifecycleOwner, { initRecycler(it) })
+        }
     }
 
     private fun initRecycler(bookList: List<BookDetails>) {
@@ -62,7 +64,8 @@ class FragmentUserAccount : Fragment(R.layout.fragment_user_account){
 
     private val clickListener = object : ItemClickListener {
         override fun onItemClicked(book: BookDetails) {
-//            showBookDetailsFragment(book)
+            val action = FragmentUserAccountDirections.actionFragmentUserAccount2ToFragmentBookDetails(book.bookId)
+            findNavController().navigate(action)
         }
     }
 }
