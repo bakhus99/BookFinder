@@ -23,7 +23,8 @@ class AddBookViewModel(
                     it?.let { _message.postValue(it) }
                 },
                 fail = { TODO() },
-                bookDetails = book
+                bookDetails = book,
+                bookId = book.bookId
             )
         }
         return message

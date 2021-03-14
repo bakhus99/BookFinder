@@ -96,4 +96,12 @@
         android:id="@+id/fragmentAddBook"
         android:name="com.exceptioncatchers.bookfinder.addbook.view.FragmentAddBook"
         android:label="FragmentAddBook" />
+    <fragment
+        android:id="@+id/fragmentUserLibrary"
+        android:name="com.exceptioncatchers.bookfinder.userlibrary.FragmentUserLibrary"
+        android:label="FragmentUserLibrary" >
+        <action
+            android:id="@+id/action_fragmentUserLibrary_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
 </navigation>
