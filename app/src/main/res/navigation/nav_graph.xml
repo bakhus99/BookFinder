@@ -19,9 +19,7 @@
         <action
             android:id="@+id/action_startFragment_to_booksListFragment"
             app:destination="@id/booksListFragment" />
-        <action
-            android:id="@+id/action_startFragment_to_locationFragment"
-            app:destination="@id/locationFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -80,4 +78,8 @@
             app:argType="string"
             android:defaultValue='""' />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentUserAccount"
+        android:name="com.exceptioncatchers.bookfinder.useraccaunt.FragmentUserAccount"
+        android:label="FragmentUserAccount" />
 </navigation>

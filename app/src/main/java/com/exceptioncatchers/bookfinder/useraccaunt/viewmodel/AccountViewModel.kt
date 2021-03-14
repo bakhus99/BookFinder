@@ -18,7 +18,7 @@ class AccountViewModel(private val repository: BooksListRepository) : ViewModel(
 
     fun requestUserSharingList(userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            TODO()
+
         }
     }
 
