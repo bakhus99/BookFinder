@@ -52,7 +52,9 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
             bookTitle.text = book.bookTitle
             bookAutor.text = book.bookAuthor
             ratingBar.rating = book.bookRating
-            cardViewButton.setOnClickListener { TODO() }
+            cardViewButton.setOnClickListener {
+                TODO()
+            }
             bookDescription.text = book.bookDescription
             //реализовать диалог с полным описанием по клику
             bookDescription.setOnClickListener { TODO() }
