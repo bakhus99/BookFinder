@@ -30,11 +30,7 @@ class MessagesFragment : Fragment(R.layout.fragment_messages) {
         fetchCurrentUser()
         fetchUsers()
 
-        binding.btnSignOut.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
-            val action = MessagesFragmentDirections.actionMessagesFragmentToStartFragment()
-            findNavController().navigate(action)
-        }
+
     }
 
     private fun fetchCurrentUser() {

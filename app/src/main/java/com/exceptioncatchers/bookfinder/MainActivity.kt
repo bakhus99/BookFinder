@@ -27,11 +27,14 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.registerFragment,
-                R.id.loginFragment
+                R.id.loginFragment,
+                R.id.messagesFragment,
+                R.id.booksListFragment,
+                R.id.fragmentUserAccount2
             )
         )
 
-        setupActionBarWithNavController(navController)
+        setupActionBarWithNavController(navController,appBarConfiguration)
         binding.bottomDrawer.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
