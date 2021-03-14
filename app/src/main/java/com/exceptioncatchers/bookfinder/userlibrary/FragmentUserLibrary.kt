@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -13,6 +14,7 @@ import com.exceptioncatchers.bookfinder.bookdetails.FragmentBookDetails
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.databinding.FragmentUserLibraryBinding
 import com.exceptioncatchers.bookfinder.loginregister.models.User
+import com.exceptioncatchers.bookfinder.useraccaunt.FragmentUserAccountDirections
 import com.exceptioncatchers.bookfinder.userlibrary.adapter.ItemClickListener
 import com.exceptioncatchers.bookfinder.userlibrary.adapter.UserLibraryAdapter
 import com.exceptioncatchers.bookfinder.userlibrary.viewmodel.UserLibraryViewModel
@@ -49,7 +51,7 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
                 .into(binding.userImage)
         }
         binding.userName.text = user.username
-        binding.mailImg.setOnClickListener { TODO() }
+        binding.mailImg.setOnClickListener { sendMessage(user) }
     }
 
     private fun initRecycler(bookList: List<BookDetails>) {
@@ -63,6 +65,11 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
         override fun onItemClicked(book: BookDetails) {
 //            showBookDetailsFragment(book)
         }
+    }
+
+    private fun sendMessage(user: User) {
+        val action = FragmentUserLibraryDirections.actionFragmentUserLibraryToChatFragment(user)
+        findNavController().navigate(action)
     }
 
 //    private fun showBookDetailsFragment(book: BookDetails) {
