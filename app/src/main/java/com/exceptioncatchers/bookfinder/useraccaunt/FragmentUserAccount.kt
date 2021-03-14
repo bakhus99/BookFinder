@@ -12,6 +12,7 @@ import com.exceptioncatchers.bookfinder.R
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.databinding.FragmentUserAccountBinding
 import com.exceptioncatchers.bookfinder.loginregister.models.User
+import com.exceptioncatchers.bookfinder.messages.MessagesFragmentDirections
 import com.exceptioncatchers.bookfinder.useraccaunt.adapter.UserSharingListAdapter
 import com.exceptioncatchers.bookfinder.useraccaunt.viewmodel.AccountViewModel
 import com.exceptioncatchers.bookfinder.useraccaunt.viewmodel.AccountViewModelFactory
@@ -27,6 +28,12 @@ class FragmentUserAccount : Fragment(R.layout.fragment_user_account) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserAccountBinding.bind(view)
         subscribeResponseUserList()
+        binding.btnSignOut.setOnClickListener {
+                FirebaseAuth.getInstance().signOut()
+                val action = FragmentUserAccountDirections.actionFragmentUserAccount2ToStartFragment()
+                findNavController().navigate(action)
+
+        }
     }
 
     private fun subscribeResponseUserList() {
