@@ -38,11 +38,11 @@ class FragmentAddBook : Fragment(R.layout.fragment_add_book) {
             0F, 0, uid!!, ""
         )
         binding.addBookBut.setOnClickListener {
-            addBookViewModel.addBook(newBook).observe(this.viewLifecycleOwner, { responseMessage ->
-                responseMessage?.let {
-                    Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
-                }
-            })
+//            addBookViewModel.addBook(newBook).observe(this.viewLifecycleOwner, { responseMessage ->
+//                responseMessage?.let {
+//                    Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+//                }
+//            })
         }
     }
 

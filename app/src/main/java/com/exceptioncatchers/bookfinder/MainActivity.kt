@@ -30,7 +30,8 @@ class MainActivity : AppCompatActivity() {
                 R.id.loginFragment,
                 R.id.messagesFragment,
                 R.id.booksListFragment,
-                R.id.fragmentUserAccount2
+                R.id.fragmentUserAccount2,
+                R.id.startFragment
             )
         )
 

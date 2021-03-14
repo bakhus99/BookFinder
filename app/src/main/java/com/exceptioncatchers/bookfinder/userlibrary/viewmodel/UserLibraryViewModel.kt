@@ -30,13 +30,14 @@ class UserLibraryViewModel(
         }
     }
 
-    fun getBookListFromUser(userName: String) {
+    fun getBookListFromUser(userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            libraryRepo.getBooksListDataFromFirebase(
+            libraryRepo.getUserBooks(
                 success = {
                     it?.let { _bookListResponse.postValue(it) }
                 },
-                fail = { TODO() }
+                fail = { TODO() },
+                userId = userId
             )
         }
     }

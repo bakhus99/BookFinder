@@ -76,9 +76,8 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     }
 
     private fun goUserLibrary(userId: String) {
-        requireFragmentManager().beginTransaction()
-            .replace(R.id.nav_host_fragment, FragmentUserLibrary.newInstance(userId))
-            .addToBackStack("FragmentBookDetails")
-            .commit()
+ //       val action = FragmentBookDetailsDirections.actionFragmentBookDetailsToFragmentUserLibrary(userId)
+        val action = FragmentBookDetailsDirections.actionFragmentBookDetailsToFragmentUserLibrary(userId)
+        findNavController().navigate(action)
     }
 }

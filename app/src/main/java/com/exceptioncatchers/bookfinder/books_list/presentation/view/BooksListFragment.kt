@@ -30,12 +30,16 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
         setupListeners()
         initRecyclerView()
         initViewModel()
+        initRating()
+    }
+
+    private fun initRating() {
+
     }
 
     private fun initViewModel() {
         booksListViewModel.loadBooksList()
         booksListViewModel.getBooksList().observe(this.viewLifecycleOwner, ::handleBooksList)
-
     }
 
     private fun handleBooksList(booksList: List<BookDetails>?) {
@@ -63,7 +67,6 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
     }
 
     override fun onBookClick(bookId: String) {
-        Toast.makeText(requireContext(), "****** $bookId *****", Toast.LENGTH_SHORT).show()
         val action = BooksListFragmentDirections.actionBooksListFragmentToFragmentBookDetails2(bookId)
         findNavController().navigate(action)
     }

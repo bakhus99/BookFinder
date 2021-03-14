@@ -5,7 +5,7 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -26,11 +26,13 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
     }
     private lateinit var userId: String
     private lateinit var binding: FragmentUserLibraryBinding
+ //   private val args: FragmentUserLibraryArgs by navArgs()
+    private val args: FragmentUserLibraryArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserLibraryBinding.bind(view)
-        userId = requireNotNull(requireArguments().getString(USER_KEY))
+        userId = requireNotNull(args.userId)
         subscribeBookLibrary(userId)
     }
 
@@ -68,8 +70,8 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
     }
 
     private fun sendMessage(user: User) {
-        val action = FragmentUserLibraryDirections.actionFragmentUserLibraryToChatFragment(user)
-        findNavController().navigate(action)
+//        val action = FragmentUserLibraryDirections.actionFragmentUserLibraryToChatFragment(user)
+//        findNavController().navigate(action)
     }
 
 //    private fun showBookDetailsFragment(book: BookDetails) {
@@ -81,9 +83,9 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
 
     companion object {
         private const val COLUMN = 2
-        private const val USER_KEY = "user"
-        fun newInstance(userId: String): Fragment = FragmentUserLibrary().apply {
-            arguments = bundleOf(USER_KEY to userId)
-        }
+//        private const val USER_KEY = "user"
+//        fun newInstance(userId: String): Fragment = FragmentUserLibrary().apply {
+//            arguments = bundleOf(USER_KEY to userId)
+//        }
     }
 }

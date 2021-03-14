@@ -28,7 +28,6 @@ class BooksListViewModel: ViewModel() {
         )
     }
 
-
     fun getTestData(): LiveData<BookDetails> = testData
     fun loadBookDetails(bookId: String){
         repository.getBookDetails(
