@@ -13,6 +13,8 @@ class BooksListViewModel: ViewModel() {
 
     private val testData = MutableLiveData<BookDetails>()
 
+    private val addBookSuc = MutableLiveData<String>()
+
     fun getBooksList(): LiveData<List<BookDetails>> = booksList
 
     fun loadBooksList(){
@@ -37,6 +39,18 @@ class BooksListViewModel: ViewModel() {
 
             },
             bookId
+        )
+    }
+
+    fun addBookToFirebase(bookDetails: BookDetails){
+        repository.addBookToFirebase(
+            success = {
+                addBookSuc.value = it
+            },
+            fail = {
+
+            },
+            bookDetails = bookDetails
         )
     }
 }
