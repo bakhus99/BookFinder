@@ -49,6 +49,7 @@ class FragmentUserLibrary : Fragment(R.layout.fragment_user_library) {
                 .into(binding.userImage)
         }
         binding.userName.text = user.username
+        binding.mailImg.setOnClickListener { TODO() }
     }
 
     private fun initRecycler(bookList: List<BookDetails>) {
