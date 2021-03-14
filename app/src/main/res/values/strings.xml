@@ -34,4 +34,5 @@
     <string name="add_book_description_hint">Введите краткое описание книги</string>
     <string name="add_book_button">Добавить книгу</string>
     <string name="add_book_poster">Введите адрес изображения обложки</string>
+    <string name="now_reading">Сейчас читаю</string>
 </resources>
