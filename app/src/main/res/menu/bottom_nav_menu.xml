@@ -6,20 +6,16 @@
         android:icon="@drawable/ic_books"
         android:title="Books"
         />
+
     <item
         android:id="@+id/messagesFragment"
         android:icon="@drawable/ic_chat"
         android:title="Chat"
         />
 
-    <item
-        android:id="@+id/locationFragment"
-        android:icon="@drawable/ic_location"
-        android:title="Find book"
-        />
 
     <item
-
+        android:id="@+id/fragmentUserAccount"
         android:icon="@drawable/ic_profile"
         android:title="Profile"
         />
