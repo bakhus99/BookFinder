@@ -16,11 +16,11 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentStartBinding.bind(view)
 
-//        val currentUser = FirebaseAuth.getInstance().currentUser
-//        if (currentUser != null){
-//            val action = StartFragmentDirections.actionStartFragmentToBooksListFragment()
-//            findNavController().navigate(action)
-//        }
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser != null){
+            val action = StartFragmentDirections.actionStartFragmentToBooksListFragment()
+            findNavController().navigate(action)
+        }
         binding.btnLogin.setOnClickListener {
             val action = StartFragmentDirections.actionStartFragmentToLoginFragment()
             findNavController().navigate(action)
