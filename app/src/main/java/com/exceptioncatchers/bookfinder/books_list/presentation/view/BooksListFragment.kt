@@ -66,13 +66,6 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
         Toast.makeText(requireContext(), "****** $bookId *****", Toast.LENGTH_SHORT).show()
         val action = BooksListFragmentDirections.actionBooksListFragmentToFragmentBookDetails2(bookId)
         findNavController().navigate(action)
-
-//        booksListViewModel.loadBookDetails(bookId)
-//        booksListViewModel.getTestData().observe(this.viewLifecycleOwner, ::handleTest)
-//    }
-//
-//    private fun handleTest(bookDetails: BookDetails?) {
-//        Toast.makeText(requireContext(), "****** $bookDetails *****", Toast.LENGTH_LONG).show()
     }
 }
 

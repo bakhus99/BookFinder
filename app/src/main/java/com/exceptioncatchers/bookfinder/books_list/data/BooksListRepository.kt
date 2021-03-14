@@ -1,6 +1,7 @@
 package com.exceptioncatchers.bookfinder.books_list.data
 
 import android.util.Log
+import android.widget.Toast
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.books_list.presentation.model.BookItem
 import com.exceptioncatchers.bookfinder.loginregister.models.User
@@ -10,6 +11,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import java.util.*
 
 class BooksListRepository {
 
@@ -86,5 +88,21 @@ class BooksListRepository {
                 fail(error.toString())
             }
         })
+    }
+
+    fun addBookToFirebase(
+        success: (String?) -> Unit,
+        fail: (String) -> Unit,
+        bookDetails: BookDetails
+    ){
+        val bookId = UUID.randomUUID().toString()
+        val ref = FirebaseDatabase.getInstance().getReference("books/$bookId")
+        ref.setValue(bookDetails)
+            .addOnSuccessListener {
+                success("Книга добавлена")
+            }
+            .addOnFailureListener {
+                fail("Произошла ошибка")
+            }
     }
 }
