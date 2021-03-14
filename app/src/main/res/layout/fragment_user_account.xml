@@ -48,6 +48,29 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accUserName" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/addBookButton"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="@color/button_get_sharing"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accSharingTitle">
+
+        <TextView
+            android:id="@+id/addBookText"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Добавить книгу"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerNowReading"
         android:layout_width="match_parent"
@@ -55,7 +78,7 @@
         android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accSharingTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/addBookButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
