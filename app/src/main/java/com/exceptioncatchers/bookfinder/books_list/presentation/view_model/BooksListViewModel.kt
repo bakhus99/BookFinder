@@ -50,7 +50,8 @@ class BooksListViewModel: ViewModel() {
             fail = {
 
             },
-            bookDetails = bookDetails
+            bookDetails = bookDetails,
+            bookId = bookDetails.bookId
         )
     }
 }

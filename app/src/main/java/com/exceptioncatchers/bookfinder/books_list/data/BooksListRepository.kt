@@ -1,17 +1,12 @@
 package com.exceptioncatchers.bookfinder.books_list.data
 
-import android.util.Log
-import android.widget.Toast
 import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
-import com.exceptioncatchers.bookfinder.books_list.presentation.model.BookItem
 import com.exceptioncatchers.bookfinder.loginregister.models.User
-import com.exceptioncatchers.bookfinder.messages.MessagesFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.*
 
 class BooksListRepository {
 
@@ -21,7 +16,7 @@ class BooksListRepository {
     ) {
         val booksList = mutableListOf<BookDetails>()
         val ref = FirebaseDatabase.getInstance().getReference("books")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach {
                     val book = it.getValue(BookDetails::class.java)
@@ -42,7 +37,7 @@ class BooksListRepository {
         bookId: String?
     ) {
         val ref = FirebaseDatabase.getInstance().getReference("books/$bookId")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val book = snapshot.getValue(BookDetails::class.java)
                 success(book)
@@ -95,7 +90,7 @@ class BooksListRepository {
         fail: (String) -> Unit,
         bookDetails: BookDetails,
         bookId: String?
-    ){
+    ) {
         val ref = FirebaseDatabase.getInstance().getReference("books/$bookId")
         ref.setValue(bookDetails)
             .addOnSuccessListener {
@@ -110,7 +105,23 @@ class BooksListRepository {
         success: (List<BookDetails>) -> Unit,
         fail: (String) -> Unit,
         userId: String
-    ){
+    ) {
+        val userBooksList = mutableListOf<BookDetails>()
+        val ref = FirebaseDatabase.getInstance().getReference("books")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    val book = it.getValue(BookDetails::class.java)
+                    if (book?.userUid == userId) {
+                        userBooksList.add(book)
+                    }
+                }
+                success(userBooksList)
+            }
 
+            override fun onCancelled(error: DatabaseError) {
+                fail(error.toString())
+            }
+        })
     }
 }

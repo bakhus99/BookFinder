@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_fragmentBookDetails_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_fragmentBookDetails_to_fragmentUserLibrary"
+            app:destination="@id/fragmentUserLibrary" />
     </fragment>
     <fragment
         android:id="@+id/fragmentUserAccount2"
@@ -96,4 +99,13 @@
         android:id="@+id/fragmentAddBook"
         android:name="com.exceptioncatchers.bookfinder.addbook.view.FragmentAddBook"
         android:label="FragmentAddBook" />
+    <fragment
+        android:id="@+id/fragmentUserLibrary"
+        android:name="com.exceptioncatchers.bookfinder.userlibrary.FragmentUserLibrary"
+        android:label="FragmentUserLibrary" >
+        <argument
+            android:name="userId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>
