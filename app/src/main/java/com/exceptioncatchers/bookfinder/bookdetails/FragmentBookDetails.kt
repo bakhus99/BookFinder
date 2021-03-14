@@ -38,41 +38,48 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     private fun subscribeBookDetailsResponse(bookId: String) {
         bookDetailsViewModel.getBook(bookId)
         bookDetailsViewModel.getBookDetails()
-            .observe(this.viewLifecycleOwner, {
-                subscribeUserInfo(it.userUid)
-                setupBookDetails(it)
-            })
+            .observe(this.viewLifecycleOwner, ::handleResponse)   //{
+//                subscribeUserInfo(it.userUid)
+////                setupBookDetails(it)
+//            })
     }
 
-    private fun subscribeUserInfo(userId: String) {
+    private fun handleResponse(bookDetails: BookDetails?) {
+        subscribeUserInfo(bookDetails?.userUid)
+        setupBookDetails(bookDetails)
+    }
+
+    private fun subscribeUserInfo(userId: String?) {
+        if (userId == null) return
+
         bookDetailsViewModel.getUser(userId)
-        bookDetailsViewModel.getUserInfo().observe(this.viewLifecycleOwner, { userResponse ->
-            userResponse?.let {
-                user = it
-            }
-        })
+//        bookDetailsViewModel.getUserInfo().observe(this.viewLifecycleOwner, { userResponse ->
+//            userResponse?.let {
+//                user = it
+//            }
+//        })
     }
 
-    private fun setupBookDetails(book: BookDetails) {
-        binding.bookTitle.append(book.bookTitle)
-        binding.bookAutor.append(book.bookAuthor)
+    private fun setupBookDetails(book: BookDetails?) {
+        binding.bookTitle.append(book?.bookTitle)
+        binding.bookAutor.append(book?.bookAuthor)
         this.context?.let {
             Glide.with(it)
                 .asBitmap()
-                .load(book.bookPoster)
+                .load(book?.bookPoster)
                 .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                 .centerCrop()
                 .into(binding.bookPoster)
         }
-        binding.ratingBar.rating = book.bookRating
+        binding.ratingBar.rating = book?.bookRating ?: 0F
         binding.cardViewButton.setOnClickListener { TODO() }
-        binding.bookDescription.append(book.bookDescription)
+        binding.bookDescription.append(book?.bookDescription)
         //реализовать диалог с полным описанием по клику
         binding.bookDescription.setOnClickListener { TODO() }
         //реализовать подгрузку юзернейма и листенер с переходом в профиль
-        binding.bookOwnerUsername.append(book.userUid)
+        binding.bookOwnerUsername.append(book?.userUid)
         binding.bookOwnerUsername.setOnClickListener { goUserLibrary(user.uid) }
-        binding.quantityCount.append(book.sharingCount.toString())
+        binding.quantityCount.append(book?.sharingCount.toString())
     }
 
     private fun goUserLibrary(userId: String) {
