@@ -38,8 +38,8 @@ class UserLibraryViewHolder(private val binding: BookHolderBinding) : RecyclerVi
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
             .centerCrop()
             .into(binding.bookImg)
-        binding.bookName.append(book.bookTitle)
-        binding.bookWriter.append(book.bookAuthor)
+        binding.bookName.text = book.bookTitle
+        binding.bookWriter.text = book.bookAuthor
     }
 }
 
