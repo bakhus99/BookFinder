@@ -13,6 +13,7 @@ class BooksListViewHolder(
     fun bind(bookDetail: BookDetails) {
         binding.bookItemTitle.text = bookDetail.bookTitle
         binding.bookItemAuthor.text = bookDetail.bookAuthor
+        binding.fragmentMoviesListRating.rating = bookDetail.bookRating
         Glide
             .with(binding.root)
             .load(bookDetail.bookPoster)

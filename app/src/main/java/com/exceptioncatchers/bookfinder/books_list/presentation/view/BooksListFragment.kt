@@ -30,12 +30,16 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
         setupListeners()
         initRecyclerView()
         initViewModel()
+        initRating()
+    }
+
+    private fun initRating() {
+
     }
 
     private fun initViewModel() {
         booksListViewModel.loadBooksList()
         booksListViewModel.getBooksList().observe(this.viewLifecycleOwner, ::handleBooksList)
-
     }
 
     private fun handleBooksList(booksList: List<BookDetails>?) {

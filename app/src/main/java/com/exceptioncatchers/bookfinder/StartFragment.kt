@@ -29,15 +29,5 @@ class StartFragment : Fragment(R.layout.fragment_start) {
             val action = StartFragmentDirections.actionStartFragmentToRegisterFragment()
             findNavController().navigate(action)
         }
-        binding.btnTest.setOnClickListener {
-            val action = StartFragmentDirections.actionStartFragmentToBooksListFragment()
-            findNavController().navigate(action)
-        }
-
-        binding.btnLocation.setOnClickListener {
-//            val action = StartFragmentDirections.actionStartFragmentToMapsFragment()
-//            findNavController().navigate(action)
-        }
-
     }
 }
