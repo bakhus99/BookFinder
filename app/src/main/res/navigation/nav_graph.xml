@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_fragmentBookDetails_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            android:id="@+id/action_fragmentBookDetails_to_fragmentUserLibrary"
+            app:destination="@id/fragmentUserLibrary" />
     </fragment>
     <fragment
         android:id="@+id/fragmentUserAccount2"
@@ -106,5 +109,9 @@
         <action
             android:id="@+id/action_fragmentUserLibrary_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <argument
+            android:name="userId"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

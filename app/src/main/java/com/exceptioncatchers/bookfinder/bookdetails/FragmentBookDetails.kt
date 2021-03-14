@@ -76,6 +76,7 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
     }
 
     private fun goUserLibrary(userId: String) {
+ //       val action = FragmentBookDetailsDirections.actionFragmentBookDetailsToFragmentUserLibrary(userId)
         val action = FragmentBookDetailsDirections.actionFragmentBookDetailsToFragmentUserLibrary(userId)
         findNavController().navigate(action)
     }
