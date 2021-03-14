@@ -35,7 +35,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
         }
 
         binding.btnLocation.setOnClickListener {
-            val action = StartFragmentDirections.actionStartFragmentToLocationFragment()
+            val action = StartFragmentDirections.actionStartFragmentToMapsFragment()
             findNavController().navigate(action)
         }
 

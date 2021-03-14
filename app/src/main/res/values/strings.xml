@@ -33,4 +33,6 @@
     <string name="add_book_poster_title">Обложка</string>
     <string name="add_book_description_hint">Введите краткое описание книги</string>
     <string name="add_book_button">Добавить книгу</string>
+
+    <string name="google_maps_key" translatable="false">AIzaSyDIu-HWehQlXz-TfPKo6AS9IzPTveCg3XM</string>
 </resources>

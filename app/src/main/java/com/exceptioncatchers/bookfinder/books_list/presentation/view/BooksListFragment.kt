@@ -67,8 +67,8 @@ class BooksListFragment : Fragment(R.layout.fragment_books_list), OnBookClickLis
 
     override fun onBookClick(bookId: String) {
         Toast.makeText(requireContext(), "****** $bookId *****", Toast.LENGTH_SHORT).show()
-        val action = BooksListFragmentDirections.actionBooksListFragmentToFragmentBookDetails()
-        findNavController().navigate(action)
+//        val action = BooksListFragmentDirections.actionBooksListFragmentToFragmentBookDetails()
+//        findNavController().navigate(action)
     }
 }
 
