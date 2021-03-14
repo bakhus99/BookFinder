@@ -13,6 +13,8 @@ import com.exceptioncatchers.bookfinder.databinding.FragmentLocationBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.CancellationTokenSource
+import com.google.android.material.snackbar.Snackbar
 
 class LocationFragment : Fragment(R.layout.fragment_location) {
 
@@ -31,36 +33,9 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
         binding.btnGetUserLocation.setOnClickListener {
 //            RequestPermission()
 //            getLastLocation()
-            fetchLocations()
+  //          fetchLocations()
         }
     }
-
-
-    private fun fetchLocations() {
-
-        val task = fusedLocationProviderClient.lastLocation
-
-
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 111)
-            return
-        }
-        task.addOnSuccessListener {
-            if (it!= null){
-                binding.tvUserLocation.text = "Latitude: ${it.latitude}, Longitude: ${it.longitude}"
-            }
-        }
 
     }
 
@@ -221,4 +196,4 @@ class LocationFragment : Fragment(R.layout.fragment_location) {
 //    }
 
 
-}
+//}
