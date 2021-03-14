@@ -78,4 +78,16 @@
             app:argType="string"
             android:defaultValue='""' />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentUserAccount2"
+        android:name="com.exceptioncatchers.bookfinder.useraccaunt.FragmentUserAccount"
+        android:label="FragmentUserAccount" >
+        <action
+            android:id="@+id/action_fragmentUserAccount2_to_fragmentAddBook"
+            app:destination="@id/fragmentAddBook" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddBook"
+        android:name="com.exceptioncatchers.bookfinder.addbook.view.FragmentAddBook"
+        android:label="FragmentAddBook" />
 </navigation>

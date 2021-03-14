@@ -24,18 +24,24 @@ class FragmentAddBook : Fragment(R.layout.fragment_add_book) {
     }
 
     private fun addBook() {
+        val title = binding.addBookTitleEdtx.text.toString()
+        val author = binding.addBookAuthorEdtx.text.toString()
+        val poster = binding.addBookPosterEdtx.text.toString()
+        val descrip = binding.addBookDescriptionEdtx.text.toString()
         val newBook = BookDetails(
-            binding.addBookTitleEdtx.toString(),
-            binding.addBookAuthorEdtx.toString(),
-            binding.addBookPosterEdtx.toString(),
-            binding.addBookDescriptionEdtx.toString(),
+            title,
+            author,
+            poster,
+            descrip,
             0F, 0, "", ""
         )
-        addBookViewModel.addBook(newBook).observe(this.viewLifecycleOwner, { responseMessage ->
-            responseMessage?.let {
-                Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
-            }
-        })
+        binding.addBookBut.setOnClickListener {
+            addBookViewModel.addBook(newBook).observe(this.viewLifecycleOwner, { responseMessage ->
+                responseMessage?.let {
+                    Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
     }
 
     companion object {
