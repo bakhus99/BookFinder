@@ -2,6 +2,7 @@ package com.exceptioncatchers.bookfinder.addbook.view
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.exceptioncatchers.bookfinder.R
@@ -11,15 +12,14 @@ import com.exceptioncatchers.bookfinder.bookdetails.models.BookDetails
 import com.exceptioncatchers.bookfinder.databinding.FragmentAddBookBinding
 
 class FragmentAddBook : Fragment(R.layout.fragment_add_book) {
-    private val binding: FragmentAddBookBinding by lazy {
-        FragmentAddBookBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentAddBookBinding
     private val addBookViewModel: AddBookViewModel by viewModels {
         AddBookViewModelFactory()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentAddBookBinding.bind(view)
         addBook()
     }
 
@@ -31,7 +31,11 @@ class FragmentAddBook : Fragment(R.layout.fragment_add_book) {
             binding.addBookDescriptionEdtx.toString(),
             0F, 0, "", ""
         )
-        addBookViewModel.addBook(newBook)
+        addBookViewModel.addBook(newBook).observe(this.viewLifecycleOwner, { responseMessage ->
+            responseMessage?.let {
+                Toast.makeText(context, "$it", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     companion object {

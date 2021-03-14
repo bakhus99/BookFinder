@@ -51,6 +51,7 @@ class FragmentUserAccount : Fragment(R.layout.fragment_user_account){
                 .into(binding.userPhoto)
         }
         binding.accUserName.text = user.username
+        binding.addBookButton.setOnClickListener { TODO() }
     }
 
     private val clickListener = object : ItemClickListener {
