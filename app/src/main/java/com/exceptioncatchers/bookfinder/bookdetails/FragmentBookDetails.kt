@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -53,7 +54,8 @@ class FragmentBookDetails : Fragment(R.layout.fragment_book_details) {
             bookAutor.text = book.bookAuthor
             ratingBar.rating = book.bookRating
             cardViewButton.setOnClickListener {
-                TODO()
+                val action = FragmentBookDetailsDirections.actionFragmentBookDetailsToChatFragment(user)
+                findNavController().navigate(action)
             }
             bookDescription.text = book.bookDescription
             //реализовать диалог с полным описанием по клику
