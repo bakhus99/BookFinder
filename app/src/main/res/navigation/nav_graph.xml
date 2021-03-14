@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_fragmentUserAccount2_to_fragmentAddBook"
             app:destination="@id/fragmentAddBook" />
+        <action
+            android:id="@+id/action_fragmentUserAccount2_to_fragmentBookDetails"
+            app:destination="@id/fragmentBookDetails" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAddBook"
