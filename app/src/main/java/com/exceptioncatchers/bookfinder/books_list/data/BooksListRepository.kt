@@ -93,9 +93,9 @@ class BooksListRepository {
     fun addBookToFirebase(
         success: (String?) -> Unit,
         fail: (String) -> Unit,
-        bookDetails: BookDetails
+        bookDetails: BookDetails,
+        bookId: String?
     ){
-        val bookId = UUID.randomUUID().toString()
         val ref = FirebaseDatabase.getInstance().getReference("books/$bookId")
         ref.setValue(bookDetails)
             .addOnSuccessListener {
@@ -104,5 +104,13 @@ class BooksListRepository {
             .addOnFailureListener {
                 fail("Произошла ошибка")
             }
+    }
+
+    fun getUserBooks(
+        success: (List<BookDetails>) -> Unit,
+        fail: (String) -> Unit,
+        userId: String
+    ){
+
     }
 }
